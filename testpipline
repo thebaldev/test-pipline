@@ -8,12 +8,14 @@ pipeline {
             steps {
                 // mvn test
                 sh "mvn test"
+                slackSend channel: 'devops-omq6710', message: 'job started'
             }
         }
         stage("Build") {
             steps {
                 // Add placeholder steps
                 echo "Placeholder build steps"
+                slackSend channel: 'devops-omq6710', message: 'job Build'
             }
         }
         stage("Deploy on test") {
@@ -35,9 +37,11 @@ pipeline {
         }
         success {
             echo "========pipeline executed successfully ========"
+            slackSend channel: 'devops-omq6710', message: 'job success'
         }
         failure {
             echo "========pipeline execution failed========"
+            slackSend channel: 'devops-omq6710', message: 'job failed'
         }
     }
 }
